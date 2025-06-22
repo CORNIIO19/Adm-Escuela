@@ -1,5 +1,6 @@
 #   Casos de Uso
 **CU.1 Reporte de entrega de tareas**
+
 **Autor**: Adrian Abad
 **Fecha**:
 **Descripcion**: Por medio de un reporte en el cual se encuentran las tareas y trabajos entregados, se hace saber a los padre o tutores que se entrgo por parte del alumno.
