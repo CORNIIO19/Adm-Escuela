@@ -11,5 +11,6 @@
                 2.1En el desplegable se muestra el grado ya sea de 1ro a 6to o de 1ro a 3ro\
                 2.3 En el deplegable se muestran los grupos\
                 2.4 se encuentra una seccion en la que se sube el archivo de listado de tareas entregadas\
-                3 Guearda el archivo y los sube en la plataforma
-                
+                3 Guearda el archivo y los sube en la plataforma\
+                ![ejemplo de pantalla](CU/cu1.jpg)
+
