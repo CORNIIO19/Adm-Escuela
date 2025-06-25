@@ -1,3 +1,30 @@
-@startuml
 
+@startuml
+left to right direction
+actor "Administrador" as Admin
+actor "Personal de Control Escolar" as Control
+
+rectangle "Sistema de Gestión Escolar" {
+  usecase "Gestionar Información de Usuario" as CU1
+  usecase "Visualizar información del usuario" as CU2
+  usecase "Asignar matrícula única" as CU3
+  usecase "Editar o solicitar correcciones" as CU4
+}
+
+Admin --> CU1
+Control --> CU1
+
+CU1 --> CU2 : <<include>>
+CU1 --> CU3 : <<include>>
+CU1 --> CU4 : <<extend>>
+
+note right of CU3
+La matrícula se genera automáticamente 
+basada en reglas internas del sistema.
+end note
+
+note right of CU4
+Se activa si hay datos incompletos o incorrectos.
+end note
 @enduml
+
