@@ -1,0 +1,11 @@
+| *Campo*               | *Descripción*                                                                                             |
+|-------------------------|--------------------------------------------------------------------------------------------------------------|
+| *Nombre*              | Gestionar Información de usuarios Usuario                                                                             |
+| *Autor*               | (Pendiente)                                                                                                |
+| *Fecha*               | (Pendiente)                                                                                                |
+| *Descripción*         | Este caso de uso permite a los responsables del sistema revisar la información personal capturada por los usuarios y asignar una matrícula única conforme al periodo escolar correspondiente. |
+| *Actores*             | Administrador, Personal de Control Escolar                                                                  |
+| *Precondiciones*      | - El usuario debe haber ingresado previamente su información. <br> - El sistema debe tener habilitado el módulo de matrícula. |
+| *Flujo Normal*        | 1. El actor accede al módulo de gestión de usuarios. <br> 2. Selecciona al usuario desde una lista o buscador. <br> 3. Visualiza la información personal registrada. <br> 4. Verifica que los datos estén completos y correctos. <br> 5. Selecciona el periodo escolar actual. <br> 6. El sistema genera una matrícula única basada en reglas internas (ej. año + nivel + consecutivo). <br> 7. El actor asigna y guarda la matrícula. <br> 8. El sistema actualiza el registro del usuario con la matrícula asignada. |
+| *Flujo Alternativo*   | - 3a. Si la información está incompleta, el sistema notifica al actor. <br> - 4a. Si los datos son incorrectos, el actor puede editar o solicitar correcciones. <br> - 6a. Si ya existe una matrícula para ese usuario, se muestra un mensaje de advertencia. |
+| *Poscondiciones*      | - El usuario cuenta con una matrícula única vinculada a su cuenta. <br> - La información queda actualizada en la base de datos institucional. |

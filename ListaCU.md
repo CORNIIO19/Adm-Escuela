@@ -34,14 +34,17 @@
 
 ------------------------------------------------------------------------------------------
 
-## **Casos de Usos de gestion de Usuarios**
-NOTA: este Caso de uso sirve para Revisar, actores: adm y control escolar.
-1. gestionar la informacio de los usuarios --> A1
+
 
 ## **Casos de Uso Alta de Usuarios**
 1. Ingresar Informacion de Usuario --> A1 --- asignacion de roles
 2. Ver Informacion de Usuario --> M1
 3. Modificar Informacion de Usuario --> A2
+
+## **Casos de Usos de gestion de Usuarios**
+NOTA: este Caso de uso sirve para Revisar, actores: adm y control escolar.
+1. gestionar la informacio de los usuarios --> A1
+
 
 ## **Casos de uso Asignacion de Grupos**
 1. Asignar grupos -> A1

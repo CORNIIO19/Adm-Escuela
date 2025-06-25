@@ -1,0 +1,30 @@
+@startuml "Alta de Usuarios"
+left to right direction
+
+
+actor Tutor as Ttr
+actor Profesor as Prf
+actor Alumno as Alm
+actor Administrador as Adm
+
+
+package Alta_de_Usuarios{
+    usecase "Ingresar Informacion de Usuario" as UC1
+    usecase "Ver informacion de Usuario" as UC2
+    package Gestion_de_Usuarios{
+    usecase "Gestionar Informacion de Usuario" as UC3
+    }
+} 
+
+Ttr --> UC1
+Prf --> UC1
+Alm --> UC1
+Ttr --> UC2
+Prf --> UC2
+Alm --> UC2
+Adm --> UC3
+Adm --> UC2
+
+
+
+@endum
