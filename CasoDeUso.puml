@@ -1,0 +1,100 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FDF6E3
+  BorderColor Black
+  ArrowColor Black
+}
+
+actor Tutor as T
+actor Alumno as AL
+actor Profesor as P
+actor "Control Escolar" as CE
+actor Administrador as A
+
+rectangle "Sistema de Gestión Escolar Primaria" {
+
+  package "Pagos de Colegiatura" {
+    usecase "Generar Referencia de Pago" as UC12
+    usecase "Registrar Pago" as UC13
+    usecase "Consultar Estado de Cuenta" as UC14
+  }
+
+  package "Calificaciones" {
+    usecase "Capturar Calificaciones" as UC10
+    usecase "Consultar Calificaciones" as UC11
+  }
+
+  package "Control de Asistencia" {
+    usecase "Registrar Asistencia" as UC8
+    usecase "Consultar Asistencia" as UC9
+  }
+
+  package "Control de actividades / tareas" {
+    usecase "Crear actidad" as UC15
+    usecase "Asignar actividad" as UC16
+    usecase "Calificar actividad" as UC17
+  }
+
+  package "Control/Gestion de Grupos Escolares" {
+    usecase "Crear Grupo" as UC5
+    usecase "Asignar Profesor a Grupo" as UC6
+    usecase "Asignar Alumnos a Grupo" as UC7
+  }
+
+  package "Gestión de Información de Usuarios" {
+    usecase "Registrar usuario" as UC1
+    usecase "Modificar Datos del usuario" as UC2
+    usecase "Dar de Baja usuario" as UC3
+    usecase "Consultar Datos del usuario" as UC4
+  }
+
+  package "Control de Materias" {
+    usecase "Crear materia" as UC21
+    usecase "asignar materia" as UC22
+    usecase "eliminar materia" as UC23
+  }
+
+  package "Notificación" {
+    usecase "Crear notificación" as UC18
+    usecase "Enviar notificación" as UC19
+    usecase "Ver notificaciones" as UC20
+  }
+}
+
+' Relaciones con actores
+A --> UC1
+A --> UC2
+A --> UC3
+A --> UC4
+A --> UC5
+A --> UC6
+A --> UC7
+A --> UC12
+
+CE --> UC1
+CE --> UC2
+CE --> UC3
+CE --> UC4
+CE --> UC13
+CE --> UC14
+
+P --> UC8
+P --> UC10
+
+T --> UC11
+T --> UC13
+T --> UC14
+
+AL --> UC9
+AL --> UC11
+
+' Relaciones internas
+UC13 --> UC12 : <<include>>
+UC14 --> UC13 : <<include>>
+
+UC6 --> UC5 : <<include>>
+UC7 --> UC5 : <<include>>
+
+@enduml
