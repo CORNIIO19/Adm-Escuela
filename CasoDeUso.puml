@@ -29,6 +29,7 @@ rectangle "Sistema de Gestión Escolar Primaria" {
   package "Control de Asistencia" {
     usecase "Registrar Asistencia" as UC8
     usecase "Consultar Asistencia" as UC9
+    usecase "Justificar Asistencia" as UC24
   }
 
   package "Control de actividades / tareas" {
@@ -69,8 +70,6 @@ A --> UC2
 A --> UC3
 A --> UC4
 A --> UC5
-A --> UC6
-A --> UC7
 A --> UC12
 
 CE --> UC1
@@ -86,6 +85,7 @@ P --> UC10
 T --> UC11
 T --> UC13
 T --> UC14
+T --> UC24
 
 AL --> UC9
 AL --> UC11
@@ -94,7 +94,7 @@ AL --> UC11
 UC13 --> UC12 : <<include>>
 UC14 --> UC13 : <<include>>
 
-UC6 --> UC5 : <<include>>
-UC7 --> UC5 : <<include>>
+UC6 <-- UC5 : <<include>>
+UC7 <-- UC5 : <<include>>
 
 @enduml
