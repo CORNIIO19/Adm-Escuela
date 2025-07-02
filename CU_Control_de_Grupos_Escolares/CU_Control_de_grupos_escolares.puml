@@ -1,0 +1,33 @@
+@startuml Gestion_Grupos_Escolares
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FDF6E3
+  BorderColor Black
+  ArrowColor Black
+}
+
+actor "Administrador" as A
+actor "Control Escolar" as CE
+
+rectangle "Control de Grupos Escolares" {
+  usecase "Asignar alumnos a Grupo" as UC1
+  usecase "Asignar profesor a grupo" as UC2
+  usecase "Asignar horario a grupo" as UC3
+  usecase "Asignar salon a grupo"  as UC4 
+  usecase "Crear grupo" as UC5
+
+}
+
+CE<-A
+CE-->UC1
+CE-->UC2
+CE-->UC3
+CE-->UC4
+UC1-->UC5
+UC2-->UC5
+UC3-->UC5
+UC4-->UC5
+
+
+

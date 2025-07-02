@@ -12,14 +12,22 @@ actor Alumno as AL
 actor Profesor as P
 actor "Control Escolar" as CE
 actor Administrador as A
+actor "tesorero/admin" as Cuentas
 
 rectangle "Sistema de Gestión Escolar Primaria" {
 
-  package "Pagos de Colegiatura" {
-    usecase "Generar Referencia de Pago" as UC12
-    usecase "Registrar Pago" as UC13
-    usecase "Consultar Estado de Cuenta" as UC14
-  }
+  package "Control_de_Pagos_de_Colegiatura" {
+  usecase "Buscar alumno" as UC50
+  usecase "Consultar_historial de pagos" as UC51
+  usecase "Registrar pago mensual" as UC52
+  usecase "Actualizar estatus de pago" as UC53
+  usecase "Generar recibo de pago" as UC54
+  usecase "Consultar mi historial de pago" as UC55
+   }
+
+
+
+  
 
   package "Calificaciones" {
     usecase "Capturar Calificaciones" as UC10
@@ -39,9 +47,12 @@ rectangle "Sistema de Gestión Escolar Primaria" {
   }
 
   package "Control/Gestion de Grupos Escolares" {
-    usecase "Crear Grupo" as UC5
-    usecase "Asignar Profesor a Grupo" as UC6
-    usecase "Asignar Alumnos a Grupo" as UC7
+   
+  usecase "Asignar alumnos a Grupo" as UC101
+  usecase "Asignar profesor a grupo" as UC202
+  usecase "Asignar horario a grupo" as UC303
+  usecase "Asignar salon a grupo"  as UC404 
+  usecase "Crear grupo" as UC5
   }
 
   package "Gestión de Información de Usuarios" {
@@ -65,36 +76,5 @@ rectangle "Sistema de Gestión Escolar Primaria" {
 }
 
 ' Relaciones con actores
-A --> UC1
-A --> UC2
-A --> UC3
-A --> UC4
-A --> UC5
-A --> UC12
-
-CE --> UC1
-CE --> UC2
-CE --> UC3
-CE --> UC4
-CE --> UC13
-CE --> UC14
-
-P --> UC8
-P --> UC10
-
-T --> UC11
-T --> UC13
-T --> UC14
-T --> UC24
-
-AL --> UC9
-AL --> UC11
-
-' Relaciones internas
-UC13 --> UC12 : <<include>>
-UC14 --> UC13 : <<include>>
-
-UC6 <-- UC5 : <<include>>
-UC7 <-- UC5 : <<include>>
 
 @enduml

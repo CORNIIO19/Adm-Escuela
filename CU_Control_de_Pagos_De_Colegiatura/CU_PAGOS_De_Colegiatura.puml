@@ -1,0 +1,24 @@
+@startuml Gestion_Pagos_Colegiatura
+left to right direction
+skinparam actorStyle stick
+
+
+actor "tesorero/admin" as Cuentas
+actor "Tutor" as Tutor
+
+package Pagos_de_Colegiatura{
+  usecase "Buscar alumno" as UC1
+  usecase "Consultar historial de pagos" as UC2
+  usecase "Registrar pago mensual" as UC3
+  usecase "Actualizar estatus de pago" as UC4
+  usecase "Generar recibo de pago" as UC5
+  usecase "Consultar mi historial de pago" as UC7
+}
+
+Cuentas --> UC1
+Cuentas--> UC3
+UC3 --> UC4
+UC4 --> UC5
+Tutor -->UC7
+Cuentas --> UC2
+@enduml
