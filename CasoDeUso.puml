@@ -56,11 +56,14 @@ rectangle "Sistema de Gestión Escolar Primaria" {
   usecase "Crear grupo" as UC5
   }
 
-  package "Gestión de Información de Usuarios" {
-    usecase "Registrar usuario" as UC1
-    usecase "Modificar Datos del usuario" as UC2
-    usecase "Dar de Baja usuario" as UC3
-    usecase "Consultar Datos del usuario" as UC4
+  package "Notificaciones" {
+    usecase "Crear Noificacion" as UC112
+usecase "Eliminar Notificacion" as UC223
+usecase "Modificar mi Notificacion creada por mi" as UC224
+usecase "Enviar Notificacion" as UC225
+' Los casos de consultar aun no estan bien definidos
+usecase "Consultar historial de Notificaciones" as UC225
+usecase "Consultar Historial de Notificaciones creadas por mi" as UC226
   }
 
   package "Control de Materias" {
@@ -69,10 +72,14 @@ rectangle "Sistema de Gestión Escolar Primaria" {
     usecase "eliminar materia" as UC23
   }
 
-  package "Notificación" {
-    usecase "Crear notificación" as UC18
-    usecase "Enviar notificación" as UC19
-    usecase "Ver notificaciones" as UC20
+  package "Gestion de Informacion de usuarios" {
+    usecase "Registrar Informacion del Usuario" as UC111
+usecase "Consultar Informacion del Usuario" as UC222
+usecase "Modificar mi Informacion persoanal" as UC333
+usecase "Consultar mi informacion" as UC444
+usecase "Dar de Baja al Usuario" as UC555
+usecase "Modificar Informacion del Usuario" as UC666
+usecase "Buscar a Usuario" as UC777
   }
 }
 

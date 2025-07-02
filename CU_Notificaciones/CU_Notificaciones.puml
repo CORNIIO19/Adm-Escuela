@@ -1,0 +1,42 @@
+@startuml Notificacion del Sistema
+left to right direction
+
+' NOTA: EL Personal escolar podra hacer envios de notificaciones de manera personalizada para los adeudos de pagos O Para situaciones academicas relacionadas con el rendimiento, etc.
+actor PersonalEscolar as PE 
+actor Administrador as A
+actor Profesor as P
+actor Bot as S
+
+rectangle "Sistema"{
+
+usecase "Crear Noificacion" as UC1
+usecase "Eliminar Notificacion" as UC2
+usecase "Modificar mi Notificacion creada por mi" as UC3
+usecase "Enviar Notificacion" as UC5
+' Los casos de consultar aun no estan bien definidos
+usecase "Consultar historial de Notificaciones" as UC6 
+usecase "Consultar Historial de Notificaciones creadas por mi" as UC7
+}
+A --> P
+
+P --> UC1
+P --> UC2
+P --> UC3
+P --> UC7
+
+S --> UC1
+
+A --> UC6
+
+UC1 --> UC5
+UC3 --> UC5
+
+
+
+
+
+
+
+
+@enduml
+
