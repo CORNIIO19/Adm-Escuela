@@ -1,0 +1,33 @@
+@startuml Control_Actividades_Tareas
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FDF6E3
+  BorderColor Black
+  ArrowColor Black
+}
+
+actor Profesor as P
+actor Alumno as A
+actor Tutor as T
+
+rectangle "Control de actividades / tareas" {
+    usecase "Crear actividad para el grupo" as UC15
+    usecase "Realizar la actividad asignada" as UC16
+    usecase "Calificar actividad" as UC17
+    usecase "Ver retroalimentación de la actividad" as UC18
+    usecase "Modificar calificacion" as UC19
+}
+
+' Relaciones entre actores y casos de uso
+P --> UC15
+P --> UC17
+P --> UC18
+P --> UC19
+
+A --> UC16
+A --> UC18
+
+T --> UC18
+
+@enduml
