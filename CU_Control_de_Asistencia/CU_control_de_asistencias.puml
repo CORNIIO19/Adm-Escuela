@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam usecase {
+  BackgroundColor #D6EAF8
+  BorderColor Black
+  ArrowColor Black
+}
+
+actor profesor
+actor alumno
+actor tutor
+
+rectangle "CONTROL DE ASISTENCIA" {
+  usecase "Ver asistencia" as VA
+  usecase "Justificar asistencia" as JA
+  usecase "Modificar la lista" as ML
+  usecase "Publicar lista de asistencia" as PL
+}
+
+profesor --> VA
+profesor --> ML
+profesor --> PL
+
+alumno --> VA
+
+tutor --> JA
+tutor --> VA
+
+
+@enduml
