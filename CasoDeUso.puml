@@ -25,13 +25,14 @@ rectangle "Sistema de Gestión Escolar Primaria" {
   usecase "Consultar mi historial de pago" as UC55
    }
 
-
-
-  
-
-  package "Calificaciones" {
-    usecase "Capturar Calificaciones" as UC10
-    usecase "Consultar Calificaciones" as UC11
+  package "Control de Calificaciones" {
+    usecase "Ver Historial de Calificaciones" as UC1000
+    usecase "Registrar Calificaciones" as UC1100
+    usecase "Consultar Calificaciones" as UC1200
+    usecase "Modificar Calificaciones" as UC1300
+    usecase "Exportar Calificaciones" as UC1400
+    usecase "Cerrar Perioo de Captura" as UC101500
+    usecase "Consultar Validar Datos Herroneos" as UC1016
   }
 
   package "Control de Asistencia" {
@@ -64,7 +65,7 @@ rectangle "Sistema de Gestión Escolar Primaria" {
 
   package "Control de Materias" {
     usecase "Crear materia" as UC21
-    usecase "asignar materia" as UC22
+    usecase "asignar materia a grupo" as UC22
     usecase "eliminar materia" as UC23
   }
 

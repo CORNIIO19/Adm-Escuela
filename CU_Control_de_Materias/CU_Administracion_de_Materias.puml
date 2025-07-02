@@ -8,7 +8,7 @@ package "Sistema de Administracion de Materias" {
   
   usecase "Crear materia" as UC1
   usecase "Eliminar materia" as UC2
-  usecase "Asignar materia a plan" as UC3
+  usecase "Asignar materia a grupo" as UC3
 
 
   Administrador --> UC1
