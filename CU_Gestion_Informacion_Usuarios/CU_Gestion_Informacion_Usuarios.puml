@@ -1,0 +1,33 @@
+@startuml Gestion de Informacion de Usuarios
+left to right direction
+
+actor ControlEscolar as CE 
+actor administrador as A
+actor Usuario as U
+
+rectangle "Sistema"{
+
+usecase "Registrar Informacion del Usuario" as UC1
+usecase "Consultar Informacion del Usuario" as UC2
+usecase "Modificar mi Informacion persoanal" as UC3
+usecase "Consultar mi informacion" as UC5
+usecase "Dar de Baja al Usuario" as UC6
+usecase "Modificar Informacion del Usuario" as UC7
+usecase "Buscar a Usuario" as UC8
+
+}
+
+CE --> UC1
+CE --> UC2
+CE --> UC8
+CE --> UC7
+
+
+A --> UC6
+A --> CE
+
+
+U -->UC3
+U -->UC5
+
+@enduml
