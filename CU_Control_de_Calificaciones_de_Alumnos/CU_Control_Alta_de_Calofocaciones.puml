@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Profesor
+actor Administrador
+actor Alumno
+
+package "Control de Calificaciones" {
+
+  usecase "Registrar calificaciones" as UC1
+  usecase "Modificar calificaciones" as UC2
+  usecase "Consultar calificaciones" as UC3
+  usecase "Exportar calificaciones" as UC4
+  usecase "Cerrar periodo de captura" as UC5
+  usecase "Ver historial de calificaciones" as UC6
+  usecase "Validar datos erroneos" as UC7
+
+  Profesor --> UC1
+  Profesor --> UC2
+  Profesor --> UC3
+
+  Administrador --> UC2
+  Administrador --> UC3
+  Administrador --> UC4
+  Administrador --> UC5
+  Administrador --> UC7
+
+  Alumno --> UC3
+  Alumno --> UC6
+
+  UC1 --> UC7 
+  UC2 --> UC7 
+}
+@enduml
+  

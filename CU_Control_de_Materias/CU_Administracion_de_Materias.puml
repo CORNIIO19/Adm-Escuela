@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Administrador
+
+package "Sistema de Administracion de Materias" {
+  
+  usecase "Crear materia" as UC1
+  usecase "Eliminar materia" as UC2
+  usecase "Asignar materia a plan" as UC3
+
+
+  Administrador --> UC1
+  Administrador --> UC2
+  Administrador --> UC3
+}
+
+@enduml
