@@ -1,0 +1,34 @@
+@startuml Consultar_Historial_General_Pagos
+autonumber
+actor "Control Escolar / Tesorero" as Usuario
+participant "Inicio:Ventana" as IV
+participant "Objeto de Control/Clase" as OC
+participant "Objeto de Modelo/Clase" as OM
+participant "Historial:Ventana" as HV
+
+
+== Consulta inicial ==
+Usuario -> HV : Indicar que desea consultar el historial de pagos
+HV -> OC : enviarsolicituddehistorialgeneral()
+OC -> OM : buscahistoriadepagos()
+
+alt No hay registros de pago
+  OM --> OC : <<Lista vacía>>
+  OC -> HV : <<Mostrar mensaje "No se encontraron registros de pago disponibles">>
+  note right of HV
+    El proceso no sigue. 
+  end note
+
+else Hay registros de pago
+  OM --> OC : <<Registros de pago>>
+  OC -> OC : vincular pagos con alumno, grupo, grado()
+  OC -> OC : analizar estado de cada alumno por periodo()
+  OC -> HV : <<Entregar información estructurada>>
+
+  == Filtro adicional (interacción dinámica) ==
+  Usuario -> HV : Solicita búsqueda filtrada (alumno, grupo, mes o estado)
+  HV -> OC : enviarcriteriosdefiltro()
+  OC -> OM : AplicarFiltros()
+  OM --> OC : <<Resultados filtrados>>
+  OC -> HV : <<Mostrar registros coincidentes>>
+end

@@ -1,0 +1,52 @@
+@startuml Asignar_Profesor_Grupo
+
+autonumber
+actor "Administrador / Control Escolar" as Usuario
+participant "Inicio:Ventana" as IV
+participant "Objeto de Control" as OC
+participant "Objeto de Modelo" as OM
+participant "Asignación:Ventana" as AV
+
+
+== Selección de grupo ==
+Usuario -> AV : Seleccionar grupo a asignar profesor
+AV -> OC : Enviar ID de grupo
+OC -> OM : consultarDatosGrupo(idGrupo)
+OM --> OC : <<Datos del grupo>>
+OC -> OC : validarGrupoActivoYSinProfesor()
+
+alt El grupo ya tiene profesor asignado
+  OC -> AV : Mostrar "Este grupo ya tiene un profesor asignado"
+  note right
+    El usuario debe elegir otro grupo.
+  end note
+  OC -> OC : Terminar proceso/debe elegir otro grupo.
+  
+end
+
+== Consulta de profesores ==
+Usuario -> AV : Solicita lista de profesores disponibles
+AV -> OC : Solicitar profesores por turno
+OC -> OM : consultarProfesoresDisponibles()
+OM --> OC : <<Lista de profesores>>
+
+alt No hay profesores disponibles
+  OC -> AV : Mostrar "No hay profesores disponibles para este turno"
+  
+end
+
+== Asignación ==
+Usuario -> AV : Selecciona profesor
+AV -> OC : Enviar ID del profesor seleccionado
+OC -> OM : verificarDisponibilidadProfesor(idProfesor)
+
+alt Profesor ya asignado.
+  OC -> AV : Mostrar "El profesor ya está asignado a otro grupo"
+  
+else Asignación válida
+  OC -> OM : registrarAsignacionProfesor(idProfesor, idGrupo)
+  OC -> OM : actualizarEstadoGrupo(idGrupo, "con profesor asignado")
+  OC -> AV : Mostrar "Asignación exitosa"
+end
+
+@enduml
