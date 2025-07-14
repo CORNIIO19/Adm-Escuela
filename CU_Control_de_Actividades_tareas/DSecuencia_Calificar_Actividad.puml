@@ -1,0 +1,35 @@
+@startuml
+actor Profesor
+boundary Vista
+control Controlador
+entity Modelo
+database BaseDeDatos
+
+== Autenticación ==
+Profesor -> Vista : Ingresa usuario y contraseña
+Vista -> Controlador : autenticarUsuario()
+Controlador -> Modelo : verificarCredenciales(usuario, contraseña)
+Modelo -> BaseDeDatos : SELECT * FROM usuarios WHERE ...
+BaseDeDatos --> Modelo : Resultado (usuario válido)
+Modelo --> Controlador : true
+Controlador --> Vista : mostrarPanelActividades()
+
+== Selección de grupo y actividad ==
+Profesor -> Vista : Selecciona grupo y actividad
+Vista -> Controlador : obtenerEntregas(idActividad)
+Controlador -> Modelo : buscarEntregas(idActividad)
+Modelo -> BaseDeDatos : SELECT * FROM entregas WHERE actividad = id
+BaseDeDatos --> Modelo : Lista de entregas
+Modelo --> Controlador : entregas[]
+Controlador --> Vista : mostrarEntregas(entregas[])
+
+== Calificación ==
+Profesor -> Vista : Ingresa calificaciones
+Vista -> Controlador : guardarCalificacion(entregaId, calificacion)
+Controlador -> Modelo : actualizarCalificacion(entregaId, calificacion)
+Modelo -> BaseDeDatos : UPDATE entregas SET calificacion = ...
+BaseDeDatos --> Modelo : OK
+Modelo --> Controlador : éxito
+Controlador --> Vista : mostrarMensaje("Calificación guardada con éxito")
+
+@enduml
