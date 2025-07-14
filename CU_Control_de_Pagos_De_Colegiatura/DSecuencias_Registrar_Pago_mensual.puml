@@ -1,0 +1,52 @@
+@startuml Registrar_Pago_Colegiatura
+autonumber
+actor "Control Escolar / Tesorero" as Usuario
+participant "Inicio:Ventana" as IV
+participant "Objeto de Control" as OC
+participant "Objeto de modelo" as OM
+participant "Pagos:Ventana" as PV
+
+== Flujo principal ==
+Usuario -> IV : Iniciar registro de pago mensual
+IV -> OC : solicitaridentificacióndelalumno()
+
+alt Alumno no encontrado
+  OC->OC: verificainfomaciónUsuario()
+  OC->OM: consultaHistorialUsuario()
+  OM-->OC: <<Alumno no registrado>>
+  OC->IV:Mostrar mensaje "Alumno no registrado"
+  note right of OC
+    El proceso se detiene hasta registrar al alumno.
+  end note
+
+else Alumno encontrado
+  OC->OC:verifica_infomaciónUsuario()
+  OC->OM:cnsultaHistorialUsuario()
+  OM-->OC:<<RegresaInfoUsuario>>
+  OC->PV:muestraInfoUsuario()
+
+  Usuario -> PV: Ingresa/selecciona el pago del mes
+  PV -> OC: obtieneMesAPagar()
+  OC -> OC: verificaPagoFaltante()
+
+  alt Mes ya pagado
+    OC -> PV : Mostrar mensaje "Mes ya pagado"
+    note right of OC
+      El proceso se detiene.
+    end note
+
+  else Monto no coincide
+    OC -> OC : validarMonto()
+    OC -> PV : Mostrar mensaje "Monto incorrecto"
+    note right of OC
+      Se debe cubrir el total del pago para continuar.
+    end note
+
+  else Pago válido
+    OC -> OM: registroDePago()
+    OM --> OC: <<PagoRealizado>>
+    OC -> PV: muestraStatusPago()
+  end
+end
+
+@enduml

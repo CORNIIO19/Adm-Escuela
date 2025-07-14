@@ -1,0 +1,64 @@
+@startuml Asignar_Alumnos_Grupo
+
+autonumber
+actor "Control Escolar / Administrador" as Usuario
+participant "Inicio:Ventana" as IV
+participant "Objeto de Control" as OC
+participant "Objeto de Modelo" as OM
+participant "Asignación:Ventana" as AV
+
+
+
+== Selección de grupo ==
+Usuario -> AV : Indicar grupo a asignar
+AV -> OC : Enviar solicitud con ID de grupo
+OC -> OM : consultarDatosGrupo()
+OM --> OC : <<Información del grupo>>
+OC -> OC : verificarGrupoActivoYConCupo()
+
+alt Grupo no disponible
+  OC -> AV : Mostrar "Grupo inactivo o sin cupo disponible"
+  note right of AV
+    El usuario debe elegir otro grupo
+    o esperar a que se habilite cupo.
+  end note
+  
+end
+
+== Consulta de alumnos ==
+Usuario -> AV : Solicita lista de alumnos sin grupo
+AV -> OC : Solicitar alumnos elegibles
+OC -> OM : ConsultarAlumnosSinGrupo()
+OM --> OC : <<Lista de alumnos disponibles>>
+
+alt No hay alumnos elegibles
+  OC -> AV : Mostrar "No hay alumnos disponibles"
+  note right of AV
+    El proceso finaliza sin asignación.
+  end note
+  
+end
+
+== Asignación ==
+Usuario -> AV : Selecciona uno o varios alumnos
+AV -> OC : Enviar lista de alumnos a asignar
+OC -> OC : validarAsignación()
+
+loop Por cada alumno seleccionado
+  OC -> OM : verificarAsignacionAlumno(idAlumno)
+
+  alt Alumno ya asignado
+    OC -> OC : excluirAlumno(idAlumno)
+    OC -> AV : Mostrar "Alumno ya asignado a otro grupo"
+
+  else Alumno válido
+    OC -> OM : registrarAsignación(idAlumno, idGrupo)
+    OC -> OM : actualizarEstadoAlumno(idAlumno, "Asignado")
+    OC -> OM : reducirCupoGrupo(idGrupo)
+  end
+end
+
+OC -> AV : Mostrar "Asignación exitosa: X alumnos asignados"
+
+@enduml
+
