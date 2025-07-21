@@ -1,0 +1,41 @@
+@startuml
+actor Profesor
+
+participant "Objeto de Frontera" as C
+participant "Control" as S
+participant "Modelado" as BD
+
+== Flujo normal: Registro de calificaciones ==
+
+Profesor -> C : iniciaSesionModuloCalificaciones()
+Profesor -> C : ingresaCalificaciones()
+C -> S : seleccionaGrupo()
+S -> BD : solicitaLista()
+BD --> S : <<Lista>>
+S --> C : muestraLista()
+Profesor -> C : listaCapturada()
+
+group Validar lista capturada
+    S -> S : confirmaListaNoVacia()
+    alt Lista vacía
+        S --> C : <<Error: Lista vacía>>
+        C --> Profesor : mostrarError("No se ingresaron calificaciones")
+    else Lista con calificaciones
+        S --> S : <<Lista válida>>
+    end
+end
+
+group Guardar calificaciones
+    S -> BD : guardaListaActualizada()
+    alt Guardado exitoso
+        BD --> S : <<Confirmación>>
+        S --> C : <<Confirmación>>
+        C --> Profesor : refrescaLista()
+    else Error al guardar
+        BD --> S : <<Error al guardar>>
+        S --> C : <<Error al guardar>>
+        C --> Profesor : mostrarError("Error al guardar calificaciones, intente de nuevo")
+    end
+end
+@enduml
+

@@ -1,0 +1,63 @@
+@startuml
+!theme plain
+title Consulta de Calificaciones
+
+actor Alumno as A
+boundary "Interfaz Web" as IW
+control "Controlador de Calificaciones" as CC
+entity "Gestor de Datos Académicos" as GDA
+database "Base de Datos" as DB
+
+A -> IW: Accede al sistema
+A -> IW: Selecciona "Mis calificaciones"
+IW -> CC: Solicita consulta de calificaciones
+CC -> GDA: Obtener ciclos del alumno
+
+CC -> GDA: Obtener ciclos del alumno
+GDA -> DB: Consulta ciclos escolares disponibles
+DB --> GDA: Lista de ciclos escolares
+GDA --> CC: Ciclos del alumno
+CC --> IW: Datos de ciclos procesados
+
+alt Ciclos disponibles
+    IW --> A: Muestra lista de ciclos escolares
+    A -> IW: Selecciona ciclo/periodo académico
+    IW -> CC: Solicita materias del periodo
+    CC -> GDA: Obtener materias del ciclo
+    
+    GDA -> DB: Consulta materias del periodo seleccionado
+    DB --> GDA: Lista de materias cursadas
+    GDA --> CC: Materias del periodo
+    CC --> IW: Datos de materias procesados
+    
+    alt Materias encontradas
+        IW --> A: Muestra materias cursadas en ese periodo
+        IW -> CC: Solicita calificaciones
+        CC -> GDA: Obtener calificaciones del alumno
+        GDA -> DB: Consulta calificaciones del alumno
+        DB --> GDA: Calificaciones del alumno
+        GDA --> CC: Calificaciones procesadas
+        CC --> IW: Datos de calificaciones
+        
+        alt Calificaciones disponibles
+            IW --> A: Muestra calificaciones (solo lectura)
+            note over A: El alumno puede consultar sus calificaciones
+        else Sin calificaciones registradas
+            IW --> A: Mensaje "No hay calificaciones disponibles"
+        end
+        
+    else Sin materias cursadas
+        IW --> A: Mensaje "No hay materias registradas en este periodo"
+    end
+    
+else Sin ciclos disponibles
+    IW --> A: Mensaje "No hay ciclos escolares disponibles"
+end
+
+opt Alumno desea consultar otro periodo
+    A -> IW: Selecciona "Consultar otro periodo"
+    note over A,IW: El proceso se repite desde la selección de ciclo
+end
+
+note over A,DB: Sistema de consulta de calificaciones con arquitectura por capas
+@enduml

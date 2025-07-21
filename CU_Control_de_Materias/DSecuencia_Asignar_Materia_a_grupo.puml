@@ -1,0 +1,26 @@
+@startuml
+actor Administrador
+
+participant "Objeto de Frontera" as C
+participant "Control" as S
+participant "Modelado" as BD
+
+== Flujo Normal ==
+
+Administrador -> C : ingresaInformacion()
+C -> S : seleccionaGrupoParaMateria()
+S -> BD : materiaDisponible()
+
+alt Materias disponibles
+    BD --> S : <<Lista Materias>>
+    S --> C : despliegaListaMateria()
+    Administrador -> C : seleccionaMaterias()
+    C -> S : guardaSeleccion()
+    S --> C : <<Confirmacion Exito>>
+    C --> Administrador : mostrarMensajeExito()
+else No hay materias disponibles
+    BD --> S : <<Sin Materias>>
+    S --> C : <<Mensaje Error>>
+    C --> Administrador : mostrarMensajeError("No hay materias disponibles")
+end
+@enduml

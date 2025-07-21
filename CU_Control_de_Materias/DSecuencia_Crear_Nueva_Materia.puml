@@ -1,0 +1,42 @@
+@startuml
+actor Administrador
+
+participant "Objeto de Frontera" as C
+participant "Control" as S
+participant "Modelado" as BD
+
+== Flujo normal: Crear nueva materia ==
+
+Administrador -> C : ingresaInformacion()
+C -> S : parametrosMateria()
+
+group Verificar materia repetida
+    S -> BD : verificaMateriaRepetida()
+    alt Materia ya existe
+        BD --> S : <<Materia existente>>
+        S --> C : <<Error: Materia ya existe>>
+        C --> Administrador : mostrarError("La materia ya existe")
+        
+    else Materia no existe
+        BD --> S : <<Materia no existe>>
+    end
+end
+
+group Verificar campos completos
+    S -> S : verificaCamposLlenos()
+    alt Campos incompletos
+        S --> C : <<Error: Campos incompletos>>
+        C --> Administrador : mostrarError("Complete todos los campos")
+      
+
+    else Campos completos
+        S --> S : <<Campos completos>>
+    end
+end
+
+S -> BD : guardaNuevaMateria()
+BD --> S : <<Notificacion Exito>>
+S --> C : <<Notificacion Exito>>
+C --> Administrador : mostrarVentanaExito("Materia registrada con éxito")
+@enduml
+
