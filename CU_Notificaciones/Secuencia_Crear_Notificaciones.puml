@@ -1,0 +1,39 @@
+@startuml CrearNotificacion
+
+actor Usuario as Administrador
+boundary VentanaSistema
+control Controlador
+entity Modelo
+
+Administrador -> VentanaSistema : Accede a la sección Notificaciones
+VentanaSistema -> Controlador : Solicita acceso a creación
+Controlador -> Controlador : Verifica permisos
+
+alt Usuario sin permisos
+    Controlador -> VentanaSistema : <<Muestra error "Sin permisos para crear notificación">>
+else Usuario autorizado
+    Controlador -> VentanaSistema : Muestra formulario de notificación
+    Administrador -> VentanaSistema : Ingresa datos de notificación
+    VentanaSistema -> Controlador : Envía datos
+    Controlador -> Controlador : Valida datos
+
+    alt Datos incompletos o inválidos
+        Controlador -> VentanaSistema : <<Muestra error y solicita corrección>>
+    else Usuario cancela creación
+        VentanaSistema -> VentanaSistema : Descarta datos y vuelve al menú
+    else Todo correcto
+        Controlador -> VentanaSistema : <<Muestra previsualización>>
+        Administrador -> VentanaSistema : Confirma creación
+        VentanaSistema -> Controlador : Confirma creación
+
+        alt Notificación creada por Bot
+            Controlador -> Controlador : Genera notificación automática
+        end
+
+        Controlador -> Modelo : Guarda notificación
+        Modelo --> Controlador : Confirmación de guardado
+        Controlador -> VentanaSistema : Muestra mensaje "Notificación creada"
+    end
+end
+
+@enduml

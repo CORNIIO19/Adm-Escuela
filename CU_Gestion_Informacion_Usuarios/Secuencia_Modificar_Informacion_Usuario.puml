@@ -1,0 +1,44 @@
+@startuml Diagrama de Secuencia de Registro de Informacion de Nuevos Usuarios
+
+actor ControlEscolar
+boundary VentanaSistema
+control Controlador
+entity Modelo
+boundary VentanaUsuarios
+boundary VentanaPersonal
+
+ControlEscolar -> VentanaSistema : Autentifica a inicio Inicio
+VentanaSistema -> Controlador : ObtieneCredenciales()
+Controlador -> Controlador : ConfirmaInformacion()
+' note left Controlador : Esta Funcion Sirve para poder verificar que lo que el usuario esta ingresando sea un formato valido y no algo malicioso
+Controlador -> Modelo : ConsultaInformacion()
+Modelo -> Controlador : <<Responde si el usuario existe en la base de datos>>
+Controlador -> VentanaSistema : <<Actualiza Ventana Inicio Con la Autentificacion del Usuario>>
+ControlEscolar -> VentanaSistema : Accede a la Seccion de Gestion de Usuarios
+VentanaSistema -> VentanaUsuarios : <<Muestra la seccion de Gestion de Usuarios>>
+ControlEscolar -> VentanaUsuarios : ingresa informacion a un buscardor
+VentanaUsuarios -> Controlador : ObtieneInformacion()
+Controlador -> Controlador : ConfirmaInformacion()
+Controlador -> Modelo : ConsultaInformacion()
+Modelo -> Controlador : <<Responde si el usuario existe>>
+Controlador -> VentanaPersonal : MuestraInformacion() 
+ControlEscolar -> VentanaPersonal : Selecciona opcion Modificar Informacion
+VentanaPersonal -> Controlador : ObtieneInformacion()
+Controlador -> Controlador : ConfirmaInformacion()
+
+alt Usuario sin permisos suficientes
+    Controlador -> VentanaPersonal : Muestra error "Sin permisos para modificar"
+else Campo no editable
+    Controlador -> VentanaPersonal : Muestra error "Campo no editable"
+else Datos incompletos o inválidos
+    Controlador -> VentanaPersonal : Muestra error "Corrige los datos"
+    Controlador -> VentanaPersonal : Limpia datos ingresados
+else Usuario cancela modificación
+    VentanaPersonal -> VentanaUsuarios : Regresa al menú principal
+else Todo válido
+    Controlador -> Modelo : RegistraInformacion()
+    Modelo -> Controlador : <<Responde Actualizacion Exitosa>> 
+    Controlador -> VentanaPersonal : MuestraInformacion()
+end
+
+@enduml

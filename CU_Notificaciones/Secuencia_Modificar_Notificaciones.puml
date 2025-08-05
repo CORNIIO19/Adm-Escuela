@@ -1,0 +1,46 @@
+@startuml ModificarNotificacion
+
+actor Usuario
+boundary VentanaSistema
+control Controlador
+entity Modelo
+
+Usuario -> VentanaSistema : Accede a la sección Notificaciones
+VentanaSistema -> Controlador : Solicita lista de notificaciones creadas por usuario
+Controlador -> Modelo : Consulta notificaciones creadas por el usuario
+Modelo --> Controlador : <<Lista de notificaciones>>
+Controlador -> VentanaSistema : <<Muestra notificaciones al usuario>>
+
+Usuario -> VentanaSistema : Selecciona notificación a modificar
+VentanaSistema -> Controlador : Verifica existencia de la notificación y autoria
+
+alt Notificación no existe o no fue creada por el usuario
+    Controlador -> VentanaSistema : <<Muestra error "No se puede modificar esta notificación">>
+else Notificación válida
+    Controlador -> VentanaSistema : Muestra detalles de la notificación
+    Usuario -> VentanaSistema : Selecciona opción Modificar
+    Usuario -> VentanaSistema : Ingresa Informacion a Modificar
+
+    VentanaSistema -> Controlador : Envía datos modificados
+    Controlador -> Controlador : Valida permisos y datos
+
+    alt Usuario sin permisos
+        Controlador -> VentanaSistema : <<Muestra error "No tiene permisos">>
+    else Datos inválidos
+        Controlador -> VentanaSistema : <<Muestra error "Corrija los datos">>
+        Controlador -> VentanaSistema : Limpia campos modificados
+    else Campo no editable
+        Controlador -> VentanaSistema : <<Muestra error "Campo no editable">>
+    else Usuario cancela modificación
+        VentanaSistema -> VentanaSistema : <<Descarta cambios y vuelve al menú>>
+    else Todo correcto
+        Controlador -> VentanaSistema : <<Muestra previsualización>>
+        Usuario -> VentanaSistema : Confirma cambios
+        VentanaSistema -> Controlador : Confirmación final
+        Controlador -> Modelo : Actualiza notificación en la base de datos
+        Modelo --> Controlador : Confirmación de actualización
+        Controlador -> VentanaSistema : <<Muestra mensaje "Notificación actualizada">>
+    end
+end
+
+@enduml

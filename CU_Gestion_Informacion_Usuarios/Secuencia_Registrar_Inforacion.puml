@@ -1,0 +1,63 @@
+@startuml Diagrama de Secuencia de Registro de Informacion de Nuevos Usuarios
+
+actor ControlEscolar
+boundary VentanaSistema
+control Controlador
+entity Modelo
+boundary VentanaUsuarios
+database BaseDatos
+
+ControlEscolar -> VentanaSistema : Autentifica a inicio
+VentanaSistema -> Controlador : ObtieneCredenciales()
+Controlador -> Controlador : ConfirmaInformacion()
+Controlador -> Modelo : ConsultaInformacion()
+Modelo -> Controlador : <<Responde si el usuario existe en la base de datos>>
+Controlador -> VentanaSistema : <<Actualiza Ventana Inicio Con la Autentificacion del Usuario>>
+
+' Caso de uso: Registro de nuevo usuario
+ControlEscolar -> VentanaSistema : Accede a la Seccion de Gestion de Usuarios
+VentanaSistema -> VentanaUsuarios : <<Muestra la seccion de Gestion de Usuarios>>
+ControlEscolar -> VentanaUsuarios : selecciona Crear Nuevo Usuario
+VentanaUsuarios -> Controlador : SeleccionTipoUsuario()
+
+alt Tipo de usuario inválido
+    Controlador -> VentanaUsuarios : Mostrar error (tipo inválido)
+    VentanaUsuarios -> VentanaUsuarios : Limpiar formulario
+else Tipo de usuario válido
+    Controlador -> VentanaUsuarios : <<Muestra Formulario de acuerdo al tipo de Usuario>>
+    VentanaUsuarios -> Controlador : ObtieneInformacion()
+    
+    alt Información incompleta
+        Controlador -> VentanaUsuarios : Mostrar error (campos faltantes)
+        VentanaUsuarios -> VentanaUsuarios : Limpiar formulario
+    else Información completa
+        Controlador -> Controlador : validaInformacion()
+        Controlador -> Modelo : ConfirmaInformacionIngresada()
+        Modelo -> BaseDatos : VerificaExistenciaInformacion()
+        BaseDatos -> Modelo : <<Responde No Existencia>>
+        Modelo -> Controlador : <<Responde No Existe Usuario>>
+        Controlador -> VentanaUsuarios : <<Actualiza la ventana a los campos de Cuenta>>
+        VentanaUsuarios -> Controlador : ObtieneInformacionCuenta()
+        
+        alt Correo ya registrado
+            Controlador -> VentanaUsuarios : Mostrar error (correo en uso)
+            VentanaUsuarios -> VentanaUsuarios : Solicitar nuevo correo
+        else Contraseña no válida
+            Controlador -> VentanaUsuarios : Mostrar error (reglas de contraseña)
+            VentanaUsuarios -> VentanaUsuarios : Solicitar nueva contraseña
+        else Información de cuenta válida
+            Controlador -> Controlador : validaInformacion()
+            Controlador -> Modelo : VerifiqueExistenciaCuenta()
+            Modelo -> Controlador : <<Responde Existencia>>
+            Controlador -> Controlador : asignaCuentaInformacion()
+            Controlador -> VentanaUsuarios : <<muestra mensaje de confirmacion>>
+            ControlEscolar -> VentanaUsuarios : Confirma el ingreso de informacion
+            VentanaUsuarios -> Controlador : RegistraInformacion()
+            Controlador -> Modelo : GuardaInformacion()
+            Modelo -> Controlador : <<Responde Registro exitoso>>
+            Controlador -> VentanaUsuarios : <<Muestra mensaje de registro exitoso>>
+            Controlador -> VentanaUsuarios : EnviaNotificacion()
+        end
+    end
+end
+@enduml
