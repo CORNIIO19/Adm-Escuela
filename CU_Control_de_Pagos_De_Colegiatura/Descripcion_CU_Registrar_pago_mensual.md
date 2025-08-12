@@ -46,14 +46,17 @@ Este caso de uso describe el proceso mediante el cual el personal de Control Esc
 ## Flujo Alternativo
 
 **– Alumno no encontrado**  
-- El sistema muestra un mensaje de error: "Alumno no registrado".  
+
+- El sistema muestra un mensaje de error: "Alumno no registrado".
 - El usuario deberá registrar al alumno antes de continuar.  
 
 **– Mes ya pagado**  
-- El sistema notifica: "El mes seleccionado ya ha sido cubierto".  
-- El proceso se detiene y no se registra el pago duplicado.  
 
-** – El monto no coincide**  
+- El sistema notifica: "El mes seleccionado ya ha sido cubierto"
+- El proceso se detiene y no se registra el pago duplicado.
+
+– El monto no coincide
+
 - El sistema detecta que el monto no corresponde al valor definido en el calendario.  
 - Se muestra el mensaje: "Se debe cubrir el total del pago".  
 - El proceso se detiene hasta que el monto ingresado sea corregido.  
