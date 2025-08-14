@@ -1,0 +1,145 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+	background: #f6f8fa;
+	color: #222;
+	min-height: 100vh;
+}
+
+header {
+	background: #2d6cdf;
+	color: #fff;
+	padding: 0.5rem 0;
+	margin-bottom: 2rem;
+	box-shadow: 0 2px 8px rgba(44,108,223,0.08);
+}
+nav ul {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	gap: 1.5rem;
+}
+nav ul li a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	transition: background 0.2s;
+}
+nav ul li a:hover, nav ul li a.active {
+	background: #1b4fa0;
+}
+
+.home-container, .login-container, form, .main-container {
+	background: #fff;
+	max-width: 400px;
+	margin: 2rem auto;
+	padding: 2rem 2.5rem 2rem 2.5rem;
+	border-radius: 10px;
+	box-shadow: 0 2px 16px rgba(44,108,223,0.08);
+}
+
+h2 {
+	margin-bottom: 1.5rem;
+	color: #2d6cdf;
+	text-align: center;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+form input, form select, form button {
+	padding: 0.7rem 1rem;
+	border: 1px solid #cfd8dc;
+	border-radius: 5px;
+	font-size: 1rem;
+}
+form input:focus, form select:focus {
+	outline: 2px solid #2d6cdf;
+	border-color: #2d6cdf;
+}
+form button {
+	background: #2d6cdf;
+	color: #fff;
+	border: none;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+form button:hover {
+	background: #1b4fa0;
+}
+
+.error {
+	color: #d32f2f;
+	background: #ffeaea;
+	border: 1px solid #f8bcbc;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	background: #fff;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(44,108,223,0.08);
+}
+th, td {
+	padding: 0.75rem 1rem;
+	text-align: left;
+}
+th {
+	background: #2d6cdf;
+	color: #fff;
+}
+tr:nth-child(even) {
+	background: #f2f6fc;
+}
+tr:hover {
+	background: #e3edfa;
+}
+
+a {
+	color: #2d6cdf;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+a:hover {
+	color: #1b4fa0;
+	text-decoration: underline;
+}
+
+.home-menu {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-top: 2rem;
+}
+.home-menu li a {
+	display: block;
+	background: #e3edfa;
+	color: #2d6cdf;
+	padding: 0.8rem 1.2rem;
+	border-radius: 6px;
+	font-weight: 500;
+	transition: background 0.2s, color 0.2s;
+}
+.home-menu li a:hover {
+	background: #2d6cdf;
+	color: #fff;
+}
+

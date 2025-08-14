@@ -14,6 +14,7 @@
             <li><a href="?url=HistorialPagos/index">Historial de Pagos</a></li>
             <li><a href="?url=RegistrarPago/form">Registrar Pago</a></li>
             <li><a href="?url=Auth/logout">Cerrar Sesión</a></li>
+            <li><a href="?url=Notificaciones/index">Notificaciones</a></li>
         </ul>
     </nav>
 </header>

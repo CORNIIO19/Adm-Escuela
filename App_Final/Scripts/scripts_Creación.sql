@@ -60,3 +60,79 @@ CREATE TABLE materias (
     horas_practicas INT DEFAULT 0,
     creditos INT DEFAULT 0
 );
+
+CREATE TABLE IF NOT EXISTS notificaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    mensaje TEXT NOT NULL,
+    tipo ENUM('informativa','alerta','recordatorio') DEFAULT 'informativa',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_envio DATETIME DEFAULT NULL,
+    usuario_creador_id INT DEFAULT NULL,
+    estatus ENUM('activa','inactiva','eliminada') DEFAULT 'activa',
+    CONSTRAINT fk_notificaciones_usuario_creador FOREIGN KEY (usuario_creador_id) REFERENCES usuarios(id)
+        ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS notificaciones_usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    notificacion_id INT NOT NULL,
+    usuario_id INT NOT NULL,
+    leida TINYINT(1) DEFAULT 0,
+    fecha_leida DATETIME DEFAULT NULL,
+    fecha_enviada DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_notif_usuarios_notif FOREIGN KEY (notificacion_id) REFERENCES notificaciones(id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_notif_usuarios_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS profesores (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        apellido VARCHAR(100) NOT NULL,
+        estatus ENUM('activo','inactivo') DEFAULT 'activo',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de grupos
+CREATE TABLE IF NOT EXISTS grupos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        turno ENUM('matutino','vespertino') NOT NULL,
+        cupo INT NOT NULL,
+        cupo_disponible INT NOT NULL,
+        estatus ENUM('activo','inactivo') DEFAULT 'activo',
+        profesor_id INT DEFAULT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT fk_grupos_profesor FOREIGN KEY (profesor_id) REFERENCES profesores(id)
+            ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de asignación de alumnos a grupos
+CREATE TABLE IF NOT EXISTS alumnos_grupos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        alumno_id INT NOT NULL,
+        grupo_id INT NOT NULL,
+    fecha_asignacion DATE,
+        CONSTRAINT fk_alumno_grupo_alumno FOREIGN KEY (alumno_id) REFERENCES alumnos(id)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT fk_alumno_grupo_grupo FOREIGN KEY (grupo_id) REFERENCES grupos(id)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+        UNIQUE KEY unique_alumno_grupo (alumno_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de asignación de profesores a grupos (histórico)
+CREATE TABLE IF NOT EXISTS profesores_grupos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        profesor_id INT NOT NULL,
+        grupo_id INT NOT NULL,
+    fecha_asignacion DATE,
+        CONSTRAINT fk_profesor_grupo_profesor FOREIGN KEY (profesor_id) REFERENCES profesores(id)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT fk_profesor_grupo_grupo FOREIGN KEY (grupo_id) REFERENCES grupos(id)
+            ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO usuarios (username, password, nombre, tipo, info_extra)
+VALUES ('admin', 'admin123', 'Administrador General', 'Administrador', NULL);

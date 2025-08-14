@@ -14,7 +14,7 @@ Para el desarrollo del sistema se ocuparon diferentes herramientas y tecnología
 
 - **Visual Studio Code**: Como herramienta principal para desarrollar el sistema se utilizó el IDE de programación Visual Studio Code, el cual proporcionó un entorno de desarrollo eficiente y flexible, con soporte para extensiones que facilitaron la escritura del código.
 
-- **MySQL**: Para la gestión de la base de datos se utilizó MySQL, un sistema de gestión de bases de datos relacional que permitió almacenar y manipular la información de manera eficiente.
+- **MySQL Workbeanch**: Para la gestión de la base de datos se utilizó MySQL, un sistema de gestión de bases de datos relacional que permitió almacenar y manipular la información de manera eficiente.
 
 - **XAMPP**: Para facilitar la prueba del sistema, se utilizó XAMPP, un paquete que incluye Apache, MySQL y PHP, permitiendo crear un entorno de servidor local de manera sencilla, principalmente para desplegar un servidor local en el cual pudiéramos probar el funcionamiento de las distintas partes de la aplicación.
 
@@ -133,6 +133,11 @@ Para acceder al sistema, ejecute su servidor local y abra su navegador y diríja
 ```php
 localhost/App_Final/public/index.php
 ```
+
+**el sietema por default viene con una cuenta de administrador las cuales las credenciales son las siguientes:**
+
+**usuario:admin**
+**contraseña:admin123**
 
 ### **requisitos y pasos para el modulo de control de materias y calificaciones de alumnos**
 

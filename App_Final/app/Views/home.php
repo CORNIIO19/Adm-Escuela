@@ -10,26 +10,23 @@
     <div class="home-container">
         <h2>Bienvenido, <?php echo htmlspecialchars($user['nombre']); ?> (<?php echo htmlspecialchars($user['tipo']); ?>)</h2>
         <ul class="home-menu">
-<<<<<<< HEAD
+
             <?php if($user['tipo'] === 'Administrador' || $user['tipo'] === 'Control Escolar'): ?>
                 <li><a href="../Controllers/index.php">Ir a Index</a></li>
                 <li><a href="?url=CrearCuenta">Crear Cuenta</a></li>
                 <li><a href="?url=GestionUsuarios/index">Gestionar Usuarios</a></li>
-=======
-            <?php if($user['tipo'] === 'Administrador' || $user['tipo'] === 'Control Escolar' || $user['tipo'] === 'Profesor'): ?>
-                <?php if($user['tipo'] === 'Administrador' || $user['tipo'] === 'Control Escolar'): ?>
-                      <a href="../Controllers/index.php">Ir a Index</a>
-                    <li><a href="/Prueba2_fixed/public/?url=CrearCuenta">Crear Cuenta</a></li>
-                    <li><a href="/Prueba2_fixed/public/?url=GestionUsuarios/index">Gestionar Usuarios</a></li>
-                <?php endif; ?>
-                <li><a href="/Prueba2_fixed/public/?url=CrearGrupo/form">Crear Grupo</a></li>
-                <li><a href="/Prueba2_fixed/public/?url=AsignarAlumnosGrupo/form">Asignar Alumnos a Grupo</a></li>
-                <li><a href="/Prueba2_fixed/public/?url=AsignarProfesorGrupo/form">Asignar Profesor a Grupo</a></li>
->>>>>>> a566876cb6caa3c5ee62af5c5d02faadecd3736b
+                <li><a href="?url=Notificaciones/index">Notificaciones</a></li>
+                <li><a href="?url=CrearGrupo/form">Crear Grupo</a></li>
+                <li><a href="?url=AsignarAlumnosGrupo/form">Asignar Alumnos a Grupo</a></li>
+                <li><a href="?url=AsignarProfesorGrupo/form">Asignar Profesor a Grupo</a></li>
+            <?php elseif($user['tipo'] === 'Profesor'): ?>
+                <li><a href="?url=CrearGrupo/form">Crear Grupo</a></li>
+                <li><a href="?url=AsignarAlumnosGrupo/form">Asignar Alumnos a Grupo</a></li>
+                <li><a href="?url=AsignarProfesorGrupo/form">Asignar Profesor a Grupo</a></li>
             <?php endif; ?>
-            <li><a href="/Prueba2_fixed/public/?url=HistorialPagos/index">Historial de Pagos</a></li>
-            <li><a href="/Prueba2_fixed/public/?url=RegistrarPago/form">Registrar Pago</a></li>
-            <li><a href="/Prueba2_fixed/public/?url=Auth/logout">Cerrar Sesión</a></li>
+            <li><a href="?url=HistorialPagos/index">Historial de Pagos</a></li>
+            <li><a href="?url=RegistrarPago/form">Registrar Pago</a></li>
+            <li><a href="?url=Auth/logout">Cerrar Sesión</a></li>
         </ul>
     </div>
 </body>
