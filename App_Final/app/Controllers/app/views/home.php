@@ -12,7 +12,6 @@
         <ul class="home-menu">
             <?php if($user['tipo'] === 'Administrador' || $user['tipo'] === 'Control Escolar' || $user['tipo'] === 'Profesor'): ?>
                 <?php if($user['tipo'] === 'Administrador' || $user['tipo'] === 'Control Escolar'): ?>
-                      <a href="../Controllers/index.php">Ir a Index</a>
                     <li><a href="/Prueba2_fixed/public/?url=CrearCuenta">Crear Cuenta</a></li>
                     <li><a href="/Prueba2_fixed/public/?url=GestionUsuarios/index">Gestionar Usuarios</a></li>
                 <?php endif; ?>
