@@ -9,6 +9,7 @@
     <?php if (isset($user) && in_array($user['tipo'], ['Administrador', 'Control Escolar', 'Profesor'])): ?>
         <li><a href="?url=../Controllers/index.php">Gestión Académica</a></li>
     <?php endif; ?>
+    <a href="../Controllers/index.php">Ir a Index</a>
 
             <li><a href="?url=HistorialPagos/index">Historial de Pagos</a></li>
             <li><a href="?url=RegistrarPago/form">Registrar Pago</a></li>

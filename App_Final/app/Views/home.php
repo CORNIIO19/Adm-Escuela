@@ -11,6 +11,7 @@
         <h2>Bienvenido, <?php echo htmlspecialchars($user['nombre']); ?> (<?php echo htmlspecialchars($user['tipo']); ?>)</h2>
         <ul class="home-menu">
             <?php if($user['tipo'] === 'Administrador' || $user['tipo'] === 'Control Escolar'): ?>
+                <a href="../Controllers/index.php">Ir a Index</a>
                 <li><a href="?url=CrearCuenta">Crear Cuenta</a></li>
             <?php endif; ?>
             <li><a href="?url=HistorialPagos/index">Historial de Pagos</a></li>
