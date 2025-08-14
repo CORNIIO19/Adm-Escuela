@@ -6,8 +6,8 @@ use \PDOException;
 class Database {
     private $host = 'localhost';
     private $db_name = 'gestion_escuela';
-    private $username = 'root';
-    private $password = 'SOSA123';
+    private $username = '';
+    private $password = '';
     public $conn;
 
     public function getConnection() {
