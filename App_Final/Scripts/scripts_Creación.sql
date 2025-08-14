@@ -5,6 +5,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS pagos;
 DROP TABLE IF EXISTS alumnos;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS calificaciones;
+DROP TABLE IF EXISTS materias;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -22,6 +24,8 @@ CREATE TABLE IF NOT EXISTS alumnos (
     matricula VARCHAR(20) NOT NULL UNIQUE,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
+    grado INT NOT NULL,
+    grupo VARCHAR(5) NOT NULL,
     estatus ENUM('activo','inactivo') DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -38,5 +42,21 @@ CREATE TABLE IF NOT EXISTS pagos (
       ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE calificaciones (
+    id_calificacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_alumno INT NOT NULL,
+    id_materia INT NOT NULL,
+    trimestre VARCHAR(50) NOT NULL,
+    calificacion DECIMAL(5,2) NOT NULL CHECK (calificacion >= 0 AND calificacion <= 10),
+    FOREIGN KEY (id_alumno) REFERENCES alumnos(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_materia) REFERENCES materias(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
-
+CREATE TABLE materias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    horas_teoricas INT DEFAULT 0,
+    horas_practicas INT DEFAULT 0,
+    creditos INT DEFAULT 0
+);
