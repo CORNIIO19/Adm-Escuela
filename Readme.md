@@ -1,6 +1,6 @@
 # Documentación del sistema de Administración de Escuela
 
-Este proyecto tiene como objetivo el desarrollar un sistema de gestión escolar que permitirá a los usuarios de tipo administrador, docentes, control escolar, estudiantes y tutores interactuar con funcionalidades acorde a sus necesidades encontradas lo requieran.
+Este proyecto tiene como objetivo el desarrollar un sistema de gestión escolar que permitirá a los usuarios de tipo administrador, docentes, control escolar, estudiantes y tutores interactuar con funcionalidades acorde a sus necesidades lo requieran.
 
 Para el desarrollo del sistema se ocuparon diferentes herramientas y tecnologías que permitieron llevar a cabo el proyecto de manera eficiente, que a continuación se describirán:
 
